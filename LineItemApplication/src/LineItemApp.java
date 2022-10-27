@@ -5,7 +5,7 @@ public class LineItemApp {
 
 	public static void main(String args[]) {
 		
-		System.out.println("Welcome to the Line Item Calculator");
+		System.out.println("Welcome to the Line Item Calculator!");
 		System.out.println();
 
 		// Scanner is used to read input from the System.in (console)
