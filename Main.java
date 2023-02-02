@@ -1,12 +1,7 @@
-/**
- * 
- * @author 
- * @date Oct 27, 2022
- * @filename Main.java
- *
- */
-import java.text.NumberFormat;
+package murach.rectangle;
+
 import java.util.Scanner;
+import murach.rectangle.Rectangle;
 
 public class Main {
 
@@ -16,7 +11,6 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         String choice = "y";
-        
         while (choice.equalsIgnoreCase("y")) {
             // get input from user
             System.out.print("Enter length: ");
@@ -25,17 +19,13 @@ public class Main {
             System.out.print("Enter width:  ");
             double width = Double.parseDouble(sc.nextLine());
 
-            // calculate total
-            double area = width * length;
-            double perimeter = 2 * width + 2 * length;
+            // create the Rectangle object
+            Rectangle r = new Rectangle(length, width);
             
             // format and display output
-            NumberFormat number = NumberFormat.getNumberInstance();
-            number.setMinimumFractionDigits(3);
-            
             String message = 
-                "Area:         " + number.format(area) + "\n" +
-                "Perimeter:    " + number.format(perimeter) + "\n";
+                "Area:         " + r.getAreaNumberFormat() + "\n" +
+                "Perimeter:    " + r.getPerimeterNumberFormat() + "\n";
             System.out.println(message);
 
             // see if the user wants to continue
