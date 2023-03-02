@@ -1,14 +1,19 @@
-package murach.lineitem;
+package murach.ui;
 
-import java.text.NumberFormat;
 import java.util.Scanner;
+
+import murach.business.LineItem;
+import murach.business.Product;
+import murach.database.ProductDB;
 
 public class LineItemApp {
 
     public static void main(String args[]) {
+        // display a welcome message
         System.out.println("Welcome to the Line Item Calculator");
         System.out.println();
 
+        // create 1 or more line items
         Scanner sc = new Scanner(System.in);
         String choice = "y";
         while (choice.equalsIgnoreCase("y")) {
@@ -18,38 +23,20 @@ public class LineItemApp {
 
             System.out.print("Enter quantity:     ");
             int quantity = Integer.parseInt(sc.nextLine());
+            
+            // get the Product object
+            Product product = ProductDB.getProduct(productCode);
 
-            // set product price based on product code
-            double price;
-            String description;
-            if (productCode.equalsIgnoreCase("java")) {
-                price = 57.50;
-                description = "Murach's Java Programming";
-            } else if (productCode.equalsIgnoreCase("jsp")) {
-                price = 57.50;
-                description = "Murach's Java Servlets and JSP";
-            } else if (productCode.equalsIgnoreCase("mysql")) {
-                price = 54.50;
-                description = "Murach's MySQL";
-            } else if (productCode.equalsIgnoreCase("android")) {
-                price = 54.50;
-                description = "Murach's Android Programming";
-            } else {
-                description = "Unknown product";
-                price = 0;
-            }
-            
-            // calculate total
-            double total = price * quantity;
-            
-            // format and display output
-            NumberFormat currency = NumberFormat.getCurrencyInstance();
+            // create the LineItem object
+            LineItem lineItem = new LineItem(product, quantity);
+
+            // display the output
             String message = "\nLINE ITEM\n" +
-                "Code:        " + productCode + "\n" +
-                "Description: " + description + "\n" +
-                "Price:       " + currency.format(price) + "\n" +
-                "Quantity:    " + quantity + "\n" +
-                "Total:       " + currency.format(total) + "\n";
+                "Code:        " + product.getCode() + "\n" +
+                "Description: " + product.getDescription() + "\n" +
+                "Price:       " + product.getPriceFormatted() + "\n" +
+                "Quantity:    " + lineItem.getQuantity() + "\n" +
+                "Total:       " + lineItem.getTotalFormatted() + "\n";
             System.out.println(message);
 
             // see if the user wants to continue

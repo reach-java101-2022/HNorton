@@ -1,7 +1,7 @@
-package murach.rectangle;
+package murach.ui;
 
+import java.text.NumberFormat;
 import java.util.Scanner;
-import murach.rectangle.Rectangle;
 
 public class Main {
 
@@ -19,10 +19,12 @@ public class Main {
             System.out.print("Enter width:  ");
             double width = Double.parseDouble(sc.nextLine());
 
-            // create the Rectangle object
+            // calculate total
             Rectangle r = new Rectangle(length, width);
             
             // format and display output
+            NumberFormat number = NumberFormat.getNumberInstance();
+            number.setMinimumFractionDigits(3);
             String message = 
                 "Area:         " + r.getAreaNumberFormat() + "\n" +
                 "Perimeter:    " + r.getPerimeterNumberFormat() + "\n";
